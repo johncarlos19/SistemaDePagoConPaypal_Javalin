@@ -1,0 +1,43 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'com.github.johnrengelman.shadow' version '5.2.0'
+}
+group 'jlc.Pago'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+mainClassName = 'jlc.Pago.Main'
+
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    compile group: 'org.jasypt', name: 'jasypt', version: '1.9.3'
+
+    compile 'io.javalin:javalin:3.8.0'
+    //manejo de log.
+    compile "org.slf4j:slf4j-simple:1.7.28"
+    //libreria jsoup.
+    compile group: 'org.jsoup', name: 'jsoup', version: '1.11.3'
+    //Procesamiento JSON.
+    compile "com.fasterxml.jackson.core:jackson-databind:2.10.1"
+    //sistemas de plantilla:
+    compile 'org.thymeleaf:thymeleaf:3.0.5.RELEASE'
+
+    compile 'org.hibernate:hibernate-core:5.4.18.Final'
+    compile 'org.hibernate:hibernate-entitymanager:5.4.18.Final'
+    //compile group: 'org.hibernate.orm', name: 'hibernate-entitymanager', version: '5.4.18.Final'
+    compile 'com.h2database:h2:1.4.200'
+    compile 'org.postgresql:postgresql:42.2.1'
+}
+shadowJar{
+    baseName = 'app'
+    classifier = ''
+    archiveVersion = ''
+}
+task stage {
+    dependsOn shadowJar
+}
+
